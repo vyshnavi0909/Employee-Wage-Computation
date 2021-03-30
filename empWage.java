@@ -1,33 +1,29 @@
 import java.util.*;
 
 public class empWage {
+	public static final int WAGE_PER_HOUR = 20;
+	public static final int FULL_TIME_HRS = 8;
+	public static final int PART_TIME_HRS = 4;
+	public static final int ABSENT_HRS = 0; 
+	public static final int TOTAL_WORKING_DAYS = 20;
+	public static final int TOTAL_WORKING_HRS = 100;
+	static int workingHrs = 0;
 
-	public static void main(String[] args){
-		System.out.println("Welcome to Employee Wage Computation");
-		int wagePerHr = 20;
-		int fullTimeHrs = 8;
-		int partTimeHrs = 4;
-		int totalWorkingDays = 20;
-		int totalWorkingHrs = 100;
-		int workingHrs = 0;
-		int dailyWage = 0;
-		for( int day = 1; day<= totalWorkingDays; day++){
-			if(workingHrs < totalWorkingHrs){
+	static void computingWages(){
+		
+		for( int day = 1; day<= TOTAL_WORKING_DAYS; day++){
+			if(workingHrs < TOTAL_WORKING_HRS){
 				Random check = new Random();
 				int empCheck = check.nextInt(3);
 				switch(empCheck) {
 					case 0:
-						System.out.println("Day " + day +" Employee is absent");
+						workingHrs += ABSENT_HRS;
 						break;
 					case 1:
-						workingHrs += partTimeHrs;
-						dailyWage = ( wagePerHr * partTimeHrs );
-						System.out.println("Day " + day + " Employee is present for part time and wage is " + dailyWage);
+						workingHrs += PART_TIME_HRS;
 						break;
 					case 2:
-						workingHrs += fullTimeHrs;
-						dailyWage = ( wagePerHr * fullTimeHrs );
-						System.out.println("Day " + day + " Employee is present for full time and wage is " + dailyWage);
+						workingHrs += FULL_TIME_HRS;
 						break;
 					default:
 						System.out.println("invalid");
@@ -35,5 +31,15 @@ public class empWage {
 				}
 			}
 		}
+
+	int totalEmpWage = workingHrs * WAGE_PER_HOUR;
+		System.out.println("Total wage of the employee is: " + totalEmpWage);
 	}
+	public static void main(String[] args){
+		
+		System.out.println("Welcome to Employee Wage Computation");
+
+		computingWages();
+	}
+	
 }
